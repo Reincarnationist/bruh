@@ -3,103 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Quick Question...</title>
+    <title>A Quick Question... ❤️</title>
     <style>
+        /* General Aesthetic */
         body {
             background-color: #ffe4e1; /* Soft Rose */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             overflow: hidden;
+            position: relative;
         }
 
-        .container {
-            text-align: center;
-            background: white;
-            padding: 3rem;
-            border-radius: 30px;
-            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
-            border: 5px solid #ffb6c1;
-        }
-
-        h1 {
-            color: #d11d53;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            align-items: center;
-        }
-
-        button {
-            padding: 15px 35px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        #yesBtn {
-            background-color: #ff69b4;
-            color: white;
-            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
-        }
-
-        #yesBtn:hover {
-            transform: scale(1.1);
-            background-color: #ff1493;
-        }
-
-        #noBtn {
-            background-color: #a9a9a9;
-            color: white;
-            position: absolute; /* Vital for the floating movement */
-            transition: 0.1s ease;
-        }
-
-        .heart {
+        /* Falling Hearts Animation */
+        .heart-particle {
+            position: absolute;
             color: #ff69b4;
             font-size: 1.5rem;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <h1>Are you a fool? <span class="heart">♥</span></h1>
-        <div class="buttons">
-            <button id="yesBtn" onclick="confess()">Yes</button>
-            <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
-        </div>
-    </div>
-
-    <script>
-        function moveButton() {
-            const noBtn = document.getElementById('noBtn');
-            
-            // Calculate random positions within the visible window
-            // Subtracting button width/height so it doesn't go off-screen
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-
-            noBtn.style.left = `${x}px`;
-            noBtn.style.top = `${y}px`;
+            user-select: none;
+            pointer-events: none;
+            z-index: 1;
+            animation: fall linear forwards;
         }
 
-        function confess() {
-            alert("I knew it! Happy Valentine's Day! ❤️");
-            // Optional: Redirect her to a cute photo or video
-            // window.location.href = "https://your-cute-link.com";
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
-    </script>
-</body>
-</html>
+
+        /* The Main Card */
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem;
+            border-radius: 40px;
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.4);
