@@ -1,122 +1,317 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Quick Question... ❤️</title>
+    <title>💕 特别的问题 💕</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background-color: #ffe4e1;
-            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ff9a9e 100%);
+            font-family: 'Comic Sans MS', cursive, sans-serif;
             overflow: hidden;
         }
 
-        /* Falling Hearts */
-        .heart-particle {
-            position: absolute;
-            color: #ff69b4;
-            user-select: none;
+        /* Floating hearts background */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
-            animation: fall linear forwards;
-            z-index: 1;
+            overflow: hidden;
+            z-index: 0;
         }
 
-        @keyframes fall {
-            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: float-up 4s ease-in infinite;
+            opacity: 0.7;
         }
 
-        .container {
-            text-align: center;
-            background: white;
-            padding: 40px;
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px 60px;
             border-radius: 30px;
-            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
-            border: 5px solid #ffb6c1;
+            box-shadow: 0 20px 60px rgba(255, 105, 135, 0.3);
+            text-align: center;
             z-index: 10;
-            width: 300px;
-            min-height: 200px;
+            position: relative;
+            max-width: 90%;
+            animation: bounce-in 0.8s ease-out;
         }
 
-        h1 {
-            color: #d11d53;
-            font-size: 2rem;
-            margin-bottom: 30px;
+        @keyframes bounce-in {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
 
-        .buttons {
+        .cute-emoji {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: wiggle 1s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .question {
+            font-size: 32px;
+            color: #e75480;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(255, 105, 135, 0.3);
+        }
+
+        .buttons-container {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 30px;
+            flex-wrap: wrap;
+            min-height: 60px;
             position: relative;
-            height: 50px;
         }
 
-        button {
-            padding: 12px 25px;
-            font-size: 1.1rem;
-            font-weight: bold;
+        .btn {
+            padding: 15px 40px;
+            font-size: 20px;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            z-index: 20;
+            font-family: inherit;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        #yesBtn {
-            background-color: #ff69b4;
+        .btn-yes {
+            background: linear-gradient(135deg, #ff6b95 0%, #ff8e9e 100%);
             color: white;
+            box-shadow: 0 8px 25px rgba(255, 107, 149, 0.4);
         }
 
-        #noBtn {
-            background-color: #ffb6c1;
+        .btn-yes:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(255, 107, 149, 0.5);
+        }
+
+        .btn-no {
+            background: linear-gradient(135deg, #a8a8a8 0%, #c0c0c0 100%);
             color: white;
-            transition: 0.1s ease;
-            /* Start as relative so it shows up next to Yes */
-            position: relative; 
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
-        #successMessage {
+        /* Success message */
+        .success-container {
             display: none;
+            flex-direction: column;
+            align-items: center;
+            animation: pop-in 0.5s ease-out;
+        }
+
+        @keyframes pop-in {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .success-emoji {
+            font-size: 100px;
+            margin-bottom: 20px;
+            animation: heartbeat 0.8s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .success-message {
+            font-size: 36px;
+            color: #e75480;
+            text-shadow: 2px 2px 4px rgba(255, 105, 135, 0.3);
+        }
+
+        .extra-hearts {
+            margin-top: 20px;
+            font-size: 30px;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Confetti effect */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            top: -10px;
+            animation: confetti-fall 3s linear forwards;
+            z-index: 100;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <div id="questionArea">
-            <h1>Are you a fool? 💖</h1>
-            <div class="buttons">
-                <button id="yesBtn" onclick="confess()">Yes</button>
-                <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
+    <div class="hearts-container" id="heartsContainer"></div>
+    
+    <div class="card">
+        <div id="questionSection">
+            <div class="cute-emoji">🥺💕</div>
+            <h1 class="question">你是臭宝吗？</h1>
+            <div class="buttons-container">
+                <button class="btn btn-yes" onclick="showSuccess()">是的 💕</button>
+                <button class="btn btn-no" id="noBtn">不是 😤</button>
             </div>
         </div>
         
-        <div id="successMessage">
-            <h1>I KNEW IT! 🥰</h1>
-            <p>Happy Valentine's Day!</p>
-            <p style="font-size: 3rem;">❤️🌹</p>
+        <div class="success-container" id="successSection">
+            <div class="success-emoji">💖</div>
+            <p class="success-message">我知道，爱你臭宝</p>
+            <p class="extra-hearts">💕✨💕✨💕</p>
         </div>
     </div>
 
     <script>
-        // Heart Animation
+        // Create floating hearts background
         function createHeart() {
+            const heartsContainer = document.getElementById('heartsContainer');
             const heart = document.createElement('div');
-            heart.classList.add('heart-particle');
-            heart.innerHTML = '❤';
+            heart.className = 'heart';
+            heart.innerHTML = ['💕', '💗', '💖', '💘', '❤️', '🌸', '✨'][Math.floor(Math.random() * 7)];
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
-            heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 5000);
+            heart.style.animationDuration = (3 + Math.random() * 3) + 's';
+            heart.style.fontSize = (15 + Math.random() * 20) + 'px';
+            heartsContainer.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 6000);
         }
+        
         setInterval(createHeart, 300);
 
-        // Movement Logic
-        function moveButton() {
-            const noBtn = document.
+        // Dodging No button
+        const noBtn = document.getElementById('noBtn');
+        let dodgeDistance = 150;
+
+        function dodgeButton(e) {
+            const rect = noBtn.getBoundingClientRect();
+            const btnCenterX = rect.left + rect.width / 2;
+            const btnCenterY = rect.top + rect.height / 2;
+            
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            
+            const distance = Math.sqrt(
+                Math.pow(mouseX - btnCenterX, 2) + 
+                Math.pow(mouseY - btnCenterY, 2)
+            );
+            
+            if (distance < 100) {
+                const angle = Math.atan2(btnCenterY - mouseY, btnCenterX - mouseX);
+                let newX = rect.left + Math.cos(angle) * dodgeDistance;
+                let newY = rect.top + Math.sin(angle) * dodgeDistance;
+                
+                // Keep button in viewport
+                const maxX = window.innerWidth - rect.width - 20;
+                const maxY = window.innerHeight - rect.height - 20;
+                
+                newX = Math.max(20, Math.min(newX, maxX));
+                newY = Math.max(20, Math.min(newY, maxY));
+                
+                noBtn.style.position = 'fixed';
+                noBtn.style.left = newX + 'px';
+                noBtn.style.top = newY + 'px';
+                noBtn.style.transition = 'all 0.15s ease-out';
+                
+                // Increase dodge distance slightly each time
+                dodgeDistance = Math.min(dodgeDistance + 10, 250);
+            }
+        }
+
+        document.addEventListener('mousemove', dodgeButton);
+        
+        // Touch support for mobile
+        document.addEventListener('touchmove', (e) => {
+            const touch = e.touches[0];
+            dodgeButton({ clientX: touch.clientX, clientY: touch.clientY });
+        });
+
+        // Success function
+        function showSuccess() {
+            document.getElementById('questionSection').style.display = 'none';
+            document.getElementById('successSection').style.display = 'flex';
+            
+            // Create confetti
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => createConfetti(), i * 50);
+            }
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.backgroundColor = ['#ff6b95', '#ff8e9e', '#ffd1dc', '#ffb6c1', '#ff69b4'][Math.floor(Math.random() * 5)];
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            confetti.style.width = (5 + Math.random() * 10) + 'px';
+            confetti.style.height = confetti.style.width;
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => confetti.remove(), 3000);
+        }
+    </script>
+</body>
+</html>
