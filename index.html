@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💕 特别的问题 💕</title>
+    <title>💕 给宝的问题 💕</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
@@ -24,7 +24,6 @@
             overflow: hidden;
         }
 
-        /* Floating hearts background */
         .hearts-container {
             position: fixed;
             top: 0;
@@ -69,7 +68,17 @@
             z-index: 10;
             position: relative;
             max-width: 90%;
-            animation: bounce-in 0.8s ease-out;
+        }
+
+        .section {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .section.active {
+            display: flex;
+            animation: bounce-in 0.6s ease-out;
         }
 
         @keyframes bounce-in {
@@ -108,14 +117,14 @@
         .buttons-container {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 20px;
             flex-wrap: wrap;
             min-height: 60px;
             position: relative;
         }
 
         .btn {
-            padding: 15px 40px;
+            padding: 15px 35px;
             font-size: 22px;
             border: none;
             border-radius: 50px;
@@ -123,11 +132,11 @@
             font-family: 'ZCOOL KuaiLe', cursive;
             transition: transform 0.2s, box-shadow 0.2s;
             letter-spacing: 2px;
+            color: white;
         }
 
         .btn-yes {
             background: linear-gradient(135deg, #ff6b95 0%, #ff8e9e 100%);
-            color: white;
             box-shadow: 0 8px 25px rgba(255, 107, 149, 0.4);
         }
 
@@ -138,33 +147,56 @@
 
         .btn-no {
             background: linear-gradient(135deg, #a8a8a8 0%, #c0c0c0 100%);
-            color: white;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
 
-        /* Success message */
-        .success-container {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            animation: pop-in 0.5s ease-out;
+        .btn-love {
+            background: linear-gradient(135deg, #a8a8a8 0%, #c0c0c0 100%);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
 
-        @keyframes pop-in {
-            0% {
-                transform: scale(0);
-            }
-            50% {
-                transform: scale(1.2);
-            }
-            100% {
-                transform: scale(1);
-            }
+        .btn-love:hover {
+            transform: scale(1.05);
         }
 
-        .success-emoji {
+        .btn-very-love {
+            background: linear-gradient(135deg, #ffb347 0%, #ffcc33 100%);
+            box-shadow: 0 8px 25px rgba(255, 179, 71, 0.4);
+        }
+
+        .btn-very-love:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 35px rgba(255, 179, 71, 0.5);
+        }
+
+        .btn-super-love {
+            background: linear-gradient(135deg, #ff6b95 0%, #ff8e9e 100%);
+            box-shadow: 0 8px 25px rgba(255, 107, 149, 0.4);
+        }
+
+        .btn-super-love:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(255, 107, 149, 0.5);
+        }
+
+        .result-emoji {
             font-size: 100px;
             margin-bottom: 20px;
+        }
+
+        .result-message {
+            font-size: 38px;
+            text-shadow: 2px 2px 4px rgba(255, 105, 135, 0.3);
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+        }
+
+        .extra-text {
+            font-size: 30px;
+            margin-bottom: 25px;
+        }
+
+        .heartbeat {
             animation: heartbeat 0.8s ease-in-out infinite;
         }
 
@@ -173,16 +205,26 @@
             50% { transform: scale(1.2); }
         }
 
-        .success-message {
-            font-size: 38px;
-            color: #e75480;
-            text-shadow: 2px 2px 4px rgba(255, 105, 135, 0.3);
-            letter-spacing: 4px;
+        .sad-shake {
+            animation: sad-shake 0.5s ease-in-out infinite;
         }
 
-        .extra-hearts {
-            margin-top: 20px;
-            font-size: 30px;
+        @keyframes sad-shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .tsundere-bounce {
+            animation: tsundere-bounce 0.6s ease-in-out infinite;
+        }
+
+        @keyframes tsundere-bounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        .sparkle {
             animation: sparkle 1.5s ease-in-out infinite;
         }
 
@@ -191,7 +233,30 @@
             50% { opacity: 0.5; }
         }
 
-        /* Confetti effect */
+        .pink { color: #e75480; }
+        .grey { color: #888; }
+        .orange { color: #ff9f43; }
+
+        .btn-secondary {
+            padding: 12px 30px;
+            font-size: 18px;
+            background: transparent;
+            border: 2px solid rgba(231, 84, 128, 0.3);
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'ZCOOL KuaiLe', cursive;
+            color: #e75480;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(231, 84, 128, 0.1);
+            border-color: rgba(231, 84, 128, 0.5);
+            transform: scale(1.05);
+        }
+
         .confetti {
             position: fixed;
             width: 10px;
@@ -199,6 +264,7 @@
             top: -10px;
             animation: confetti-fall 3s linear forwards;
             z-index: 100;
+            pointer-events: none;
         }
 
         @keyframes confetti-fall {
@@ -213,24 +279,60 @@
     <div class="hearts-container" id="heartsContainer"></div>
     
     <div class="card">
-        <div id="questionSection">
+        <!-- Question 1 -->
+        <div class="section active" id="question1">
             <div class="cute-emoji">🥺💕</div>
             <h1 class="question">你是臭宝吗？</h1>
             <div class="buttons-container">
-                <button class="btn btn-yes" onclick="showSuccess()">是的 💕</button>
+                <button class="btn btn-yes" onclick="showSection('success1')">是的 💕</button>
                 <button class="btn btn-no" id="noBtn">不是 😤</button>
             </div>
         </div>
-        
-        <div class="success-container" id="successSection">
-            <div class="success-emoji">💖</div>
-            <p class="success-message">我知道，爱你臭宝</p>
-            <p class="extra-hearts">💕✨💕✨💕</p>
+
+        <!-- Success 1 -->
+        <div class="section" id="success1">
+            <div class="result-emoji heartbeat">💖</div>
+            <p class="result-message pink">我知道，爱你臭宝</p>
+            <p class="extra-text sparkle">💕✨💕✨💕</p>
+            <button class="btn-secondary" onclick="showSection('question2')">还有一个问题 💕</button>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section" id="question2">
+            <div class="cute-emoji">🥺💗</div>
+            <h1 class="question">臭宝爱我吗？</h1>
+            <div class="buttons-container">
+                <button class="btn btn-love" onclick="showSection('resultSad')">爱</button>
+                <button class="btn btn-very-love" onclick="showSection('resultTsundere')">很爱</button>
+                <button class="btn btn-super-love" onclick="showSection('resultLove')">超级爱 💕</button>
+            </div>
+        </div>
+
+        <!-- Result: Sad -->
+        <div class="section" id="resultSad">
+            <div class="result-emoji sad-shake">😢💔</div>
+            <p class="result-message grey">居然只是爱...</p>
+            <p class="extra-text">呜呜呜</p>
+            <button class="btn-secondary" onclick="showSection('question2')">再选一次 🥺</button>
+        </div>
+
+        <!-- Result: Tsundere -->
+        <div class="section" id="resultTsundere">
+            <div class="result-emoji tsundere-bounce">😤💢</div>
+            <p class="result-message orange">只是很爱吗？</p>
+            <p class="extra-text">哼！</p>
+            <button class="btn-secondary" onclick="showSection('question2')">重新选！😠</button>
+        </div>
+
+        <!-- Result: Love (Final) -->
+        <div class="section" id="resultLove">
+            <div class="result-emoji heartbeat">😘💖</div>
+            <p class="result-message pink">么么 我也爱宝</p>
+            <p class="extra-text sparkle">💕✨💕✨💕</p>
         </div>
     </div>
 
     <script>
-        // Create floating hearts background
         function createHeart() {
             const heartsContainer = document.getElementById('heartsContainer');
             const heart = document.createElement('div');
@@ -240,13 +342,33 @@
             heart.style.animationDuration = (3 + Math.random() * 3) + 's';
             heart.style.fontSize = (15 + Math.random() * 20) + 'px';
             heartsContainer.appendChild(heart);
-            
             setTimeout(() => heart.remove(), 6000);
         }
-        
         setInterval(createHeart, 300);
 
-        // Dodging No button
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+
+            if (sectionId === 'success1' || sectionId === 'resultLove') {
+                for (let i = 0; i < 50; i++) {
+                    setTimeout(() => createConfetti(), i * 50);
+                }
+            }
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.backgroundColor = ['#ff6b95', '#ff8e9e', '#ffd1dc', '#ffb6c1', '#ff69b4'][Math.floor(Math.random() * 5)];
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            confetti.style.width = (5 + Math.random() * 10) + 'px';
+            confetti.style.height = confetti.style.width;
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 3000);
+        }
+
         const noBtn = document.getElementById('noBtn');
         let isFixed = false;
 
@@ -255,7 +377,6 @@
             const btnRect = noBtn.getBoundingClientRect();
             const maxX = window.innerWidth - btnRect.width - padding;
             const maxY = window.innerHeight - btnRect.height - padding;
-            
             return {
                 x: padding + Math.random() * (maxX - padding),
                 y: padding + Math.random() * (maxY - padding)
@@ -266,15 +387,8 @@
             const rect = noBtn.getBoundingClientRect();
             const btnCenterX = rect.left + rect.width / 2;
             const btnCenterY = rect.top + rect.height / 2;
-            
-            const mouseX = e.clientX;
-            const mouseY = e.clientY;
-            
-            const distance = Math.sqrt(
-                Math.pow(mouseX - btnCenterX, 2) + 
-                Math.pow(mouseY - btnCenterY, 2)
-            );
-            
+            const distance = Math.sqrt(Math.pow(e.clientX - btnCenterX, 2) + Math.pow(e.clientY - btnCenterY, 2));
+
             if (distance < 100) {
                 if (!isFixed) {
                     noBtn.style.position = 'fixed';
@@ -283,9 +397,7 @@
                     noBtn.style.margin = '0';
                     isFixed = true;
                 }
-
                 const newPos = getRandomSafePosition();
-                
                 noBtn.style.left = newPos.x + 'px';
                 noBtn.style.top = newPos.y + 'px';
                 noBtn.style.transition = 'all 0.15s ease-out';
@@ -294,8 +406,7 @@
         }
 
         document.addEventListener('mousemove', dodgeButton);
-        
-        // Touch support for mobile
+
         noBtn.addEventListener('touchstart', (e) => {
             e.preventDefault();
             if (!isFixed) {
@@ -312,31 +423,6 @@
             noBtn.style.transition = 'all 0.15s ease-out';
             noBtn.style.zIndex = '1000';
         });
-
-        // Success function
-        function showSuccess() {
-            document.getElementById('questionSection').style.display = 'none';
-            document.getElementById('successSection').style.display = 'flex';
-            noBtn.style.display = 'none';
-            
-            // Create confetti
-            for (let i = 0; i < 50; i++) {
-                setTimeout(() => createConfetti(), i * 50);
-            }
-        }
-
-        function createConfetti() {
-            const confetti = document.createElement('div');
-            confetti.className = 'confetti';
-            confetti.style.left = Math.random() * 100 + 'vw';
-            confetti.style.backgroundColor = ['#ff6b95', '#ff8e9e', '#ffd1dc', '#ffb6c1', '#ff69b4'][Math.floor(Math.random() * 5)];
-            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-            confetti.style.width = (5 + Math.random() * 10) + 'px';
-            confetti.style.height = confetti.style.width;
-            document.body.appendChild(confetti);
-            
-            setTimeout(() => confetti.remove(), 3000);
-        }
     </script>
 </body>
 </html>
