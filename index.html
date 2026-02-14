@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💕 特别的问题 💕</title>
+    <title>✨ A Question For You ✨</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,13 +19,27 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ff9a9e 100%);
-            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            font-family: 'Quicksand', sans-serif;
             overflow: hidden;
+            position: relative;
         }
 
-        /* Floating hearts background */
-        .hearts-container {
+        /* Ambient glow */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 107, 175, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Floating elements background */
+        .particles-container {
             position: fixed;
             top: 0;
             left: 0;
@@ -33,110 +50,143 @@
             z-index: 0;
         }
 
-        .heart {
+        .particle {
             position: absolute;
-            font-size: 20px;
-            animation: float-up 4s ease-in infinite;
-            opacity: 0.7;
+            animation: float-up 5s ease-in infinite;
+            opacity: 0.8;
+            filter: drop-shadow(0 0 6px currentColor);
         }
 
         @keyframes float-up {
             0% {
-                transform: translateY(100vh) rotate(0deg);
+                transform: translateY(100vh) rotate(0deg) scale(0);
                 opacity: 0;
             }
             10% {
-                opacity: 0.7;
+                opacity: 0.8;
+                transform: translateY(90vh) rotate(36deg) scale(1);
             }
             90% {
-                opacity: 0.7;
+                opacity: 0.6;
             }
             100% {
-                transform: translateY(-100px) rotate(360deg);
+                transform: translateY(-100px) rotate(360deg) scale(0.5);
                 opacity: 0;
             }
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 50px 60px;
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(255, 105, 135, 0.3);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 60px 70px;
+            border-radius: 40px;
             text-align: center;
             z-index: 10;
             position: relative;
             max-width: 90%;
-            animation: bounce-in 0.8s ease-out;
+            animation: card-appear 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 
+                0 25px 80px rgba(255, 107, 175, 0.2),
+                inset 0 0 60px rgba(255, 255, 255, 0.02);
         }
 
-        @keyframes bounce-in {
+        @keyframes card-appear {
             0% {
-                transform: scale(0);
+                transform: scale(0) rotate(-10deg);
                 opacity: 0;
             }
-            50% {
-                transform: scale(1.1);
-            }
             100% {
-                transform: scale(1);
+                transform: scale(1) rotate(0deg);
                 opacity: 1;
             }
         }
 
         .cute-emoji {
-            font-size: 80px;
-            margin-bottom: 20px;
-            animation: wiggle 1s ease-in-out infinite;
+            font-size: 70px;
+            margin-bottom: 25px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
         }
 
-        @keyframes wiggle {
-            0%, 100% { transform: rotate(-5deg); }
-            50% { transform: rotate(5deg); }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
 
         .question {
-            font-size: 32px;
-            color: #e75480;
-            margin-bottom: 40px;
-            text-shadow: 2px 2px 4px rgba(255, 105, 135, 0.3);
+            font-size: 34px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f8cdda 0%, #fbab7e 50%, #f7ce68 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 45px;
+            letter-spacing: 1px;
         }
 
         .buttons-container {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 25px;
             flex-wrap: wrap;
             min-height: 60px;
             position: relative;
         }
 
         .btn {
-            padding: 15px 40px;
-            font-size: 20px;
+            padding: 16px 45px;
+            font-size: 18px;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             font-family: inherit;
-            font-weight: bold;
-            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn-yes {
-            background: linear-gradient(135deg, #ff6b95 0%, #ff8e9e 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             color: white;
-            box-shadow: 0 8px 25px rgba(255, 107, 149, 0.4);
+            box-shadow: 
+                0 10px 40px rgba(118, 75, 162, 0.4),
+                0 0 0 0 rgba(118, 75, 162, 0.4);
+            animation: glow-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { box-shadow: 0 10px 40px rgba(118, 75, 162, 0.4), 0 0 0 0 rgba(118, 75, 162, 0.4); }
+            50% { box-shadow: 0 10px 40px rgba(118, 75, 162, 0.4), 0 0 0 10px rgba(118, 75, 162, 0); }
         }
 
         .btn-yes:hover {
-            transform: scale(1.1);
-            box-shadow: 0 12px 35px rgba(255, 107, 149, 0.5);
+            transform: scale(1.08) translateY(-3px);
+            box-shadow: 0 15px 50px rgba(118, 75, 162, 0.5);
         }
 
         .btn-no {
-            background: linear-gradient(135deg, #a8a8a8 0%, #c0c0c0 100%);
-            color: white;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
 
         /* Success message */
@@ -144,107 +194,164 @@
             display: none;
             flex-direction: column;
             align-items: center;
-            animation: pop-in 0.5s ease-out;
+            animation: success-pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        @keyframes pop-in {
+        @keyframes success-pop {
             0% {
-                transform: scale(0);
-            }
-            50% {
-                transform: scale(1.2);
+                transform: scale(0) rotate(-180deg);
+                opacity: 0;
             }
             100% {
-                transform: scale(1);
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
             }
         }
 
         .success-emoji {
-            font-size: 100px;
-            margin-bottom: 20px;
-            animation: heartbeat 0.8s ease-in-out infinite;
+            font-size: 90px;
+            margin-bottom: 25px;
+            animation: heartbeat 1s ease-in-out infinite;
+            filter: drop-shadow(0 0 30px rgba(255, 107, 175, 0.6));
         }
 
         @keyframes heartbeat {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+            25% { transform: scale(1.1); }
+            40% { transform: scale(1); }
+            60% { transform: scale(1.1); }
         }
 
         .success-message {
-            font-size: 36px;
-            color: #e75480;
-            text-shadow: 2px 2px 4px rgba(255, 105, 135, 0.3);
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #f8cdda 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .extra-hearts {
-            margin-top: 20px;
-            font-size: 30px;
-            animation: sparkle 1.5s ease-in-out infinite;
-        }
-
-        @keyframes sparkle {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+        .extra-text {
+            margin-top: 25px;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 3px;
         }
 
         /* Confetti effect */
         .confetti {
             position: fixed;
-            width: 10px;
-            height: 10px;
             top: -10px;
-            animation: confetti-fall 3s linear forwards;
+            animation: confetti-fall 3.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
             z-index: 100;
+            pointer-events: none;
         }
 
         @keyframes confetti-fall {
-            to {
-                transform: translateY(100vh) rotate(720deg);
+            0% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg) scale(0);
                 opacity: 0;
             }
+        }
+
+        /* Stars */
+        .star {
+            position: fixed;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
         }
     </style>
 </head>
 <body>
-    <div class="hearts-container" id="heartsContainer"></div>
+    <div class="particles-container" id="particlesContainer"></div>
     
     <div class="card">
         <div id="questionSection">
-            <div class="cute-emoji">🥺💕</div>
-            <h1 class="question">你是臭宝吗？</h1>
+            <div class="cute-emoji">🫣✨</div>
+            <h1 class="question">Are you my cutie?</h1>
             <div class="buttons-container">
-                <button class="btn btn-yes" onclick="showSuccess()">是的 💕</button>
-                <button class="btn btn-no" id="noBtn">不是 😤</button>
+                <button class="btn btn-yes" onclick="showSuccess()">Yes I am 🦋</button>
+                <button class="btn btn-no" id="noBtn">Nope 🙄</button>
             </div>
         </div>
         
         <div class="success-container" id="successSection">
-            <div class="success-emoji">💖</div>
-            <p class="success-message">我知道，爱你臭宝</p>
-            <p class="extra-hearts">💕✨💕✨💕</p>
+            <div class="success-emoji">🫶🏻</div>
+            <p class="success-message">I knew it, love you babe</p>
+            <p class="extra-text">✦ forever & always ✦</p>
         </div>
     </div>
 
     <script>
-        // Create floating hearts background
-        function createHeart() {
-            const heartsContainer = document.getElementById('heartsContainer');
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-            heart.innerHTML = ['💕', '💗', '💖', '💘', '❤️', '🌸', '✨'][Math.floor(Math.random() * 7)];
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (3 + Math.random() * 3) + 's';
-            heart.style.fontSize = (15 + Math.random() * 20) + 'px';
-            heartsContainer.appendChild(heart);
+        // Create stars background
+        function createStars() {
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                star.style.animationDuration = (1.5 + Math.random() * 2) + 's';
+                document.body.appendChild(star);
+            }
+        }
+        createStars();
+
+        // Create floating particles
+        function createParticle() {
+            const container = document.getElementById('particlesContainer');
+            const particle = document.createElement('div');
+            particle.className = 'particle';
             
-            setTimeout(() => heart.remove(), 6000);
+            const emojis = ['✨', '🦋', '💫', '⭐', '🤍', '💜', '🔮', '🌙'];
+            particle.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDuration = (4 + Math.random() * 4) + 's';
+            particle.style.fontSize = (16 + Math.random() * 20) + 'px';
+            container.appendChild(particle);
+            
+            setTimeout(() => particle.remove(), 8000);
         }
         
-        setInterval(createHeart, 300);
+        setInterval(createParticle, 400);
 
-        // Dodging No button
+        // Dodging No button with corner escape
         const noBtn = document.getElementById('noBtn');
-        let dodgeDistance = 150;
+        let dodgeCount = 0;
+
+        function getRandomPosition() {
+            const padding = 100;
+            const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+            const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+            
+            return {
+                x: padding + Math.random() * maxX,
+                y: padding + Math.random() * maxY
+            };
+        }
+
+        function isInCorner(rect) {
+            const margin = 120;
+            const inLeftEdge = rect.left < margin;
+            const inRightEdge = rect.right > window.innerWidth - margin;
+            const inTopEdge = rect.top < margin;
+            const inBottomEdge = rect.bottom > window.innerHeight - margin;
+            
+            // Check if stuck in corner (two edges at once)
+            return (inLeftEdge || inRightEdge) && (inTopEdge || inBottomEdge);
+        }
 
         function dodgeButton(e) {
             const rect = noBtn.getBoundingClientRect();
@@ -259,34 +366,56 @@
                 Math.pow(mouseY - btnCenterY, 2)
             );
             
-            if (distance < 100) {
-                const angle = Math.atan2(btnCenterY - mouseY, btnCenterX - mouseX);
-                let newX = rect.left + Math.cos(angle) * dodgeDistance;
-                let newY = rect.top + Math.sin(angle) * dodgeDistance;
+            if (distance < 120) {
+                dodgeCount++;
                 
-                // Keep button in viewport
-                const maxX = window.innerWidth - rect.width - 20;
-                const maxY = window.innerHeight - rect.height - 20;
+                let newX, newY;
                 
-                newX = Math.max(20, Math.min(newX, maxX));
-                newY = Math.max(20, Math.min(newY, maxY));
+                // If stuck in corner or dodged too many times, teleport to random safe spot
+                if (isInCorner(rect) || dodgeCount % 5 === 0) {
+                    const newPos = getRandomPosition();
+                    newX = newPos.x;
+                    newY = newPos.y;
+                } else {
+                    // Normal dodge - move away from cursor
+                    const angle = Math.atan2(btnCenterY - mouseY, btnCenterX - mouseX);
+                    const dodgeDistance = 180;
+                    
+                    newX = rect.left + Math.cos(angle) * dodgeDistance;
+                    newY = rect.top + Math.sin(angle) * dodgeDistance;
+                    
+                    // Keep in safe zone
+                    const padding = 80;
+                    const maxX = window.innerWidth - rect.width - padding;
+                    const maxY = window.innerHeight - rect.height - padding;
+                    
+                    // If would go out of bounds, teleport to opposite side
+                    if (newX < padding || newX > maxX || newY < padding || newY > maxY) {
+                        const newPos = getRandomPosition();
+                        newX = newPos.x;
+                        newY = newPos.y;
+                    }
+                }
                 
                 noBtn.style.position = 'fixed';
                 noBtn.style.left = newX + 'px';
                 noBtn.style.top = newY + 'px';
-                noBtn.style.transition = 'all 0.15s ease-out';
-                
-                // Increase dodge distance slightly each time
-                dodgeDistance = Math.min(dodgeDistance + 10, 250);
+                noBtn.style.transition = 'all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                noBtn.style.zIndex = '1000';
             }
         }
 
         document.addEventListener('mousemove', dodgeButton);
         
         // Touch support for mobile
-        document.addEventListener('touchmove', (e) => {
-            const touch = e.touches[0];
-            dodgeButton({ clientX: touch.clientX, clientY: touch.clientY });
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const newPos = getRandomPosition();
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = newPos.x + 'px';
+            noBtn.style.top = newPos.y + 'px';
+            noBtn.style.transition = 'all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            noBtn.style.zIndex = '1000';
         });
 
         // Success function
@@ -294,23 +423,29 @@
             document.getElementById('questionSection').style.display = 'none';
             document.getElementById('successSection').style.display = 'flex';
             
-            // Create confetti
-            for (let i = 0; i < 50; i++) {
-                setTimeout(() => createConfetti(), i * 50);
+            // Create confetti burst
+            const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#ffecd2', '#fcb69f'];
+            for (let i = 0; i < 80; i++) {
+                setTimeout(() => createConfetti(colors), i * 30);
             }
         }
 
-        function createConfetti() {
+        function createConfetti(colors) {
             const confetti = document.createElement('div');
             confetti.className = 'confetti';
             confetti.style.left = Math.random() * 100 + 'vw';
-            confetti.style.backgroundColor = ['#ff6b95', '#ff8e9e', '#ffd1dc', '#ffb6c1', '#ff69b4'][Math.floor(Math.random() * 5)];
-            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-            confetti.style.width = (5 + Math.random() * 10) + 'px';
-            confetti.style.height = confetti.style.width;
-            document.body.appendChild(confetti);
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
             
-            setTimeout(() => confetti.remove(), 3000);
+            const shapes = ['50%', '0', '30%'];
+            confetti.style.borderRadius = shapes[Math.floor(Math.random() * shapes.length)];
+            
+            const size = 6 + Math.random() * 12;
+            confetti.style.width = size + 'px';
+            confetti.style.height = size + 'px';
+            confetti.style.animationDuration = (2.5 + Math.random() * 2) + 's';
+            
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 4000);
         }
     </script>
 </body>
