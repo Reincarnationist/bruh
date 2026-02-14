@@ -5,28 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Quick Question... ❤️</title>
     <style>
-        /* General Aesthetic */
         body {
-            background-color: #ffe4e1; /* Soft Rose */
-            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background-color: #ffe4e1;
+            font-family: 'Arial', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             overflow: hidden;
-            position: relative;
         }
 
-        /* Falling Hearts Animation */
+        /* Falling Hearts */
         .heart-particle {
             position: absolute;
             color: #ff69b4;
-            font-size: 1.5rem;
             user-select: none;
             pointer-events: none;
-            z-index: 1;
             animation: fall linear forwards;
+            z-index: 1;
         }
 
         @keyframes fall {
@@ -34,10 +31,92 @@
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* The Main Card */
         .container {
             text-align: center;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 3rem;
-            border-radius: 40px;
-            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.4);
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
+            border: 5px solid #ffb6c1;
+            z-index: 10;
+            width: 300px;
+            min-height: 200px;
+        }
+
+        h1 {
+            color: #d11d53;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            height: 50px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            z-index: 20;
+        }
+
+        #yesBtn {
+            background-color: #ff69b4;
+            color: white;
+        }
+
+        #noBtn {
+            background-color: #ffb6c1;
+            color: white;
+            transition: 0.1s ease;
+            /* Start as relative so it shows up next to Yes */
+            position: relative; 
+        }
+
+        #successMessage {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="questionArea">
+            <h1>Are you a fool? 💖</h1>
+            <div class="buttons">
+                <button id="yesBtn" onclick="confess()">Yes</button>
+                <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
+            </div>
+        </div>
+        
+        <div id="successMessage">
+            <h1>I KNEW IT! 🥰</h1>
+            <p>Happy Valentine's Day!</p>
+            <p style="font-size: 3rem;">❤️🌹</p>
+        </div>
+    </div>
+
+    <script>
+        // Heart Animation
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            heart.innerHTML = '❤';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createHeart, 300);
+
+        // Movement Logic
+        function moveButton() {
+            const noBtn = document.
